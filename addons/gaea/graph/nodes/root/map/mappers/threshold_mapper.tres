@@ -1,0 +1,56 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://conft7neua4ww"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_w2bvo"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_we7oc"]
+[ext_resource type="Script" uid="uid://djjvx650evm0n" path="res://addons/gaea/graph/nodes/root/map/mappers/threshold_mapper.gd" id="3_0cira"]
+
+[sub_resource type="Resource" id="Resource_o7clu"]
+script = ExtResource("1_w2bvo")
+type = 4
+name = &"range"
+default_value = null
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_ppkgb"]
+script = ExtResource("2_we7oc")
+left_enabled = true
+left_type = 0
+left_label = "Data"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_37mns"]
+script = ExtResource("2_we7oc")
+left_enabled = true
+left_type = 2
+left_label = "Material"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_qu5f3"]
+script = ExtResource("2_we7oc")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 1
+right_label = "Map"
+right_show_preview = false
+
+[resource]
+script = ExtResource("3_0cira")
+input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_ppkgb"), SubResource("Resource_37mns")])
+args = Array[ExtResource("1_w2bvo")]([SubResource("Resource_o7clu")])
+output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_qu5f3")])
+title = "ThresholdMapper"
+description = "Outputs a map.
+For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
+is_output = false
+data = {}
+salt = 0

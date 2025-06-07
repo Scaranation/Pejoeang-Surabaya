@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://b2bpg5nt6l31"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_b2mxj"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_nbgc6"]
+[ext_resource type="Script" uid="uid://bu8niqlr2pe8o" path="res://addons/gaea/graph/nodes/root/input/constants/constant.gd" id="3_ecoux"]
+
+[sub_resource type="Resource" id="Resource_givc6"]
+script = ExtResource("1_b2mxj")
+type = 9
+name = &"value"
+default_value = null
+hint = Dictionary[String, Variant]({})
+disable_input_slot = true
+add_output_slot = true
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[resource]
+script = ExtResource("3_ecoux")
+input_slots = Array[ExtResource("2_nbgc6")]([])
+args = Array[ExtResource("1_b2mxj")]([SubResource("Resource_givc6")])
+output_slots = Array[ExtResource("2_nbgc6")]([])
+title = "BoolConstant"
+description = "A boolean constant."
+is_output = false
+data = {}
+salt = 0
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"

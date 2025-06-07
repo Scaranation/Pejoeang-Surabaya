@@ -1,0 +1,377 @@
+[gd_scene load_steps=48 format=3 uid="uid://dd64i2o22muie"]
+
+[ext_resource type="Texture2D" uid="uid://ku0mpyjj02xi" path="res://assets/topdown-shooter/Tilesheet/tilesheet_complete.png" id="1"]
+[ext_resource type="Script" uid="uid://cju7otnk0fh61" path="res://Main.gd" id="2"]
+[ext_resource type="Script" uid="uid://cqrfgjnr8fmgc" path="res://Map.gd" id="2_fos0i"]
+[ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="2_kjvhd"]
+[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/resources/materials/tilemap_material.gd" id="3_5tuhn"]
+[ext_resource type="Script" uid="uid://b20xb5lexa70c" path="res://BulletManager.gd" id="4"]
+[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/resources/gaea_layer.gd" id="4_2gh4u"]
+[ext_resource type="Script" uid="uid://brb1clh2y2bv0" path="res://addons/gaea/graph/nodes/node_resource.gd" id="5_devvj"]
+[ext_resource type="Resource" uid="uid://bbkdvyxkj2slo" path="res://addons/gaea/graph/nodes/output_node_resource.tres" id="6_3b0ty"]
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="7_bg4s2"]
+[ext_resource type="Script" uid="uid://dn7bvns42klyj" path="res://UI/DevStats.gd" id="7_lgr22"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="8_hhcpw"]
+[ext_resource type="PackedScene" uid="uid://ch5w76fmlree7" path="res://UI/GUI.tscn" id="9"]
+[ext_resource type="Script" uid="uid://bcp5jmkertrct" path="res://addons/gaea/graph/nodes/root/data/noise/simplex_smooth.gd" id="9_mxvw5"]
+[ext_resource type="Script" uid="uid://djjvx650evm0n" path="res://addons/gaea/graph/nodes/root/map/mappers/threshold_mapper.gd" id="10_xrxkg"]
+[ext_resource type="Script" uid="uid://cbukcaeyblqsy" path="res://ImpactManager.gd" id="11"]
+[ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variables/variable_node.gd" id="11_sqvbp"]
+[ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/resources/gaea_data.gd" id="12_hri7i"]
+[ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="14_2gh4u"]
+[ext_resource type="Texture2D" uid="uid://doiyjbbo7f3vb" path="res://assets/topdown-shooter/Tilesheet/ArtForTOPDOWN-GaeaTutorial.png" id="14_devvj"]
+
+[sub_resource type="Resource" id="Resource_2gh4u"]
+script = ExtResource("3_5tuhn")
+type = 0
+source_id = 0
+atlas_coord = Vector2i(0, 0)
+alternative_tile = 0
+preview_color = Color(1, 1, 1, 0)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_5mvff"]
+script = ExtResource("4_2gh4u")
+enabled = true
+
+[sub_resource type="Resource" id="Resource_88nce"]
+script = ExtResource("7_bg4s2")
+type = 0
+name = &"frequency"
+default_value = 0.01
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_w4c4h"]
+script = ExtResource("7_bg4s2")
+type = 0
+name = &"lacunarity"
+default_value = 2.0
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_7ltu6"]
+script = ExtResource("7_bg4s2")
+type = 1
+name = &"octaves"
+default_value = 5
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_8tvqk"]
+script = ExtResource("8_hhcpw")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data [0, 1]"
+right_show_preview = true
+
+[sub_resource type="Resource" id="Resource_oye8v"]
+script = ExtResource("9_mxvw5")
+type = 0
+input_slots = Array[ExtResource("8_hhcpw")]([])
+args = Array[ExtResource("7_bg4s2")]([SubResource("Resource_88nce"), SubResource("Resource_w4c4h"), SubResource("Resource_7ltu6")])
+output_slots = Array[ExtResource("8_hhcpw")]([SubResource("Resource_8tvqk")])
+title = "SimplexSmooth2D"
+description = "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture.
+[b]Ignores the z axis.[/b]"
+is_output = false
+data = {
+&"frequency": 0.01,
+&"lacunarity": 2.0,
+&"octaves": 5.0
+}
+salt = 2955114044
+
+[sub_resource type="Resource" id="Resource_o7clu"]
+script = ExtResource("7_bg4s2")
+type = 4
+name = &"range"
+default_value = null
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_ppkgb"]
+script = ExtResource("8_hhcpw")
+left_enabled = true
+left_type = 0
+left_label = "Data"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_37mns"]
+script = ExtResource("8_hhcpw")
+left_enabled = true
+left_type = 2
+left_label = "Material"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_qu5f3"]
+script = ExtResource("8_hhcpw")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 1
+right_label = "Map"
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_40n85"]
+script = ExtResource("10_xrxkg")
+input_slots = Array[ExtResource("8_hhcpw")]([SubResource("Resource_ppkgb"), SubResource("Resource_37mns")])
+args = Array[ExtResource("7_bg4s2")]([SubResource("Resource_o7clu")])
+output_slots = Array[ExtResource("8_hhcpw")]([SubResource("Resource_qu5f3")])
+title = "ThresholdMapper"
+description = "Outputs a map.
+For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
+is_output = false
+data = {
+&"range": {
+"max": 1.0,
+"min": 0.0
+}
+}
+salt = 1639392158
+
+[sub_resource type="Resource" id="Resource_cvpld"]
+script = ExtResource("7_bg4s2")
+type = 3
+name = &"name"
+default_value = null
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_gb15f"]
+script = ExtResource("11_sqvbp")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("8_hhcpw")]([])
+args = Array[ExtResource("7_bg4s2")]([SubResource("Resource_cvpld")])
+output_slots = Array[ExtResource("8_hhcpw")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+&"name": "Grass"
+}
+salt = 1018435215
+
+[sub_resource type="Resource" id="Resource_sph85"]
+script = ExtResource("12_hri7i")
+layers = Array[ExtResource("4_2gh4u")]([SubResource("Resource_5mvff")])
+connections = Array[Dictionary]([{
+"from_node": 0,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 1,
+"to_port": 0
+}, {
+"from_node": 3,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 1,
+"to_port": 1
+}, {
+"from_node": 1,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 2,
+"to_port": 0
+}])
+resources = Array[ExtResource("5_devvj")]([SubResource("Resource_oye8v"), SubResource("Resource_40n85"), ExtResource("6_3b0ty"), SubResource("Resource_gb15f")])
+node_data = Array[Dictionary]([{
+"name": &"_GraphNode_72606",
+"position": Vector2(-660, -440)
+}, {
+"name": &"_GraphNode_72729",
+"position": Vector2(-300, -280)
+}, {
+"name": &"BaseNode",
+"position": Vector2(40, -140)
+}, {
+"name": &"_GraphNode_72783",
+"position": Vector2(-660, -260)
+}])
+parameters = Dictionary[StringName, Variant]({
+&"Grass": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "Grass",
+"type": 24,
+"value": SubResource("Resource_2gh4u")
+}
+})
+scroll_offset = Vector2(0, 0)
+other = {
+"scroll_offset": Vector2(-950.488, -487.981)
+}
+Grass = SubResource("Resource_2gh4u")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3b0ty"]
+texture = ExtResource("14_devvj")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bg4s2"]
+sources/0 = SubResource("TileSetAtlasSource_3b0ty")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lgr22"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_trn2v"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_03owx"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wkp8b"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_20pc6"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5vvyt"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c6i3y"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c2ibq"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dxm6"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lgr22")
+1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_trn2v")
+2:0/0 = 0
+2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_03owx")
+3:0/0 = 0
+3:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wkp8b")
+4:0/0 = 0
+4:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_20pc6")
+5:0/0 = 0
+5:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_5vvyt")
+6:0/0 = 0
+6:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_c6i3y")
+7:0/0 = 0
+7:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_c2ibq")
+20:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lgr22"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_3dxm6")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("2")
+
+[node name="Map2" type="Node2D" parent="."]
+visible = false
+
+[node name="GaeaGenerator" type="Node" parent="Map2"]
+script = ExtResource("2_kjvhd")
+data = SubResource("Resource_sph85")
+seed = 2073979343
+metadata/_custom_type_script = "uid://d4feanreabm81"
+
+[node name="TilemapGaeaRenderer" type="Node" parent="Map2" node_paths=PackedStringArray("tile_map_layers", "generator")]
+script = ExtResource("14_2gh4u")
+tile_map_layers = [NodePath("../TileMapLayer")]
+generator = NodePath("../GaeaGenerator")
+metadata/_custom_type_script = "uid://b4x16tyyfihmb"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Map2"]
+tile_set = SubResource("TileSet_bg4s2")
+
+[node name="Map" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_lgr22")
+format = 2
+script = ExtResource("2_fos0i")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(117.103, 275.92)
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource("4")
+
+[node name="ImpactManager" type="Node2D" parent="."]
+script = ExtResource("11")
+
+[node name="GUI" parent="." instance=ExtResource("9")]
+
+[node name="DevStats" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_lgr22")
+
+[node name="FPSLabel" type="Label" parent="GUI/DevStats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MemoryLabel" type="Label" parent="GUI/DevStats"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 40.0
+offset_bottom = 55.0
+
+[node name="VRAMLabel" type="Label" parent="GUI/DevStats"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 40.0
+offset_bottom = 87.0
+
+[node name="OSLabel" type="Label" parent="GUI/DevStats"]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 40.0
+offset_bottom = 119.0

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bms2bwebdg2mj"]
+
+[ext_resource type="Script" uid="uid://52akdfkq4ffg" path="res://actors/AI.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 300.0
+
+[node name="AI" type="Node2D"]
+script = ExtResource("1")
+should_draw_path_line = null
+
+[node name="DetectionZone" type="Area2D" parent="." groups=["enemy"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("1")
+
+[node name="PatrolTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="PathLine" type="Line2D" parent="."]
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_PatrolTimer_timeout"]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch5w76fmlree7"]
+
+[ext_resource type="FontFile" path="res://UI/roboto_mono_36.tres" id="1"]
+[ext_resource type="Script" uid="uid://djaypx2gksfrd" path="res://UI/GUI.gd" id="2"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HealthSection" type="CenterContainer" parent="MarginContainer/Rows/BottomRow"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow/HealthSection"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AmmoSection" type="HBoxContainer" parent="MarginContainer/Rows/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+alignment = 2
+
+[node name="CurrentAmmo" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+text = "30"
+
+[node name="AmmoSeparator" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+text = " / "
+
+[node name="MaxAmmo" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+text = "30"

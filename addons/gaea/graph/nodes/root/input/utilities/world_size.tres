@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dyk8vkdntdudc"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_ed7be"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_1btle"]
+[ext_resource type="Script" uid="uid://fc8vogh4mvhw" path="res://addons/gaea/graph/nodes/root/input/utilities/world_size.gd" id="3_ed7be"]
+
+[sub_resource type="Resource" id="Resource_ed7be"]
+script = ExtResource("2_1btle")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 7
+right_label = "World Size"
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[resource]
+script = ExtResource("3_ed7be")
+input_slots = Array[ExtResource("2_1btle")]([])
+args = Array[ExtResource("1_ed7be")]([])
+output_slots = Array[ExtResource("2_1btle")]([SubResource("Resource_ed7be")])
+title = "WorldSize"
+description = "The world_size parameter in the generator's inspector."
+is_output = false
+data = {}
+salt = 0
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"

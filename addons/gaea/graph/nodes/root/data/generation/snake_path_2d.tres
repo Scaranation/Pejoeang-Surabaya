@@ -1,0 +1,109 @@
+[gd_resource type="Resource" load_steps=13 format=3 uid="uid://bh1u4kqfvh0fy"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_75iak"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_a0dir"]
+[ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/generation/snake_path_2d.gd" id="3_ud703"]
+
+[sub_resource type="Resource" id="Resource_5odk7"]
+script = ExtResource("1_75iak")
+type = 1
+name = &"move_left_weight"
+default_value = 40
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_r83pm"]
+script = ExtResource("1_75iak")
+type = 1
+name = &"move_right_weight"
+default_value = 40
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
+disable_input_slot = false
+add_output_slot = false
+
+[sub_resource type="Resource" id="Resource_2j7op"]
+script = ExtResource("1_75iak")
+type = 1
+name = &"move_down_weight"
+default_value = 20
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
+disable_input_slot = false
+add_output_slot = false
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_7hrwv"]
+script = ExtResource("1_75iak")
+type = 6
+name = &"Flags"
+default_value = null
+disable_input_slot = false
+add_output_slot = false
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_4yg0g"]
+script = ExtResource("1_75iak")
+type = 5
+name = &"left"
+default_value = 1
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_fpsoe"]
+script = ExtResource("1_75iak")
+type = 5
+name = &"right"
+default_value = 2
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_f1mpl"]
+script = ExtResource("1_75iak")
+type = 5
+name = &"down"
+default_value = 4
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_qr7np"]
+script = ExtResource("1_75iak")
+type = 5
+name = &"up"
+default_value = 8
+hint = Dictionary[String, Variant]({})
+disable_input_slot = false
+add_output_slot = false
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_ci3aq"]
+script = ExtResource("2_a0dir")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data"
+right_show_preview = true
+
+[resource]
+script = ExtResource("3_ud703")
+input_slots = Array[ExtResource("2_a0dir")]([])
+args = Array[ExtResource("1_75iak")]([SubResource("Resource_5odk7"), SubResource("Resource_r83pm"), SubResource("Resource_2j7op"), SubResource("Resource_7hrwv"), SubResource("Resource_4yg0g"), SubResource("Resource_fpsoe"), SubResource("Resource_f1mpl"), SubResource("Resource_qr7np")])
+output_slots = Array[ExtResource("2_a0dir")]([SubResource("Resource_ci3aq")])
+title = "SnakePath2D"
+description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). "
+is_output = false
+data = {}
+salt = 0
