@@ -27,7 +27,6 @@ shape = SubResource("1")
 position = Vector2(16, 12)
 
 [node name="Health" parent="." instance=ExtResource("4")]
-visible = false
 
 [node name="AI" parent="." instance=ExtResource("5")]
 

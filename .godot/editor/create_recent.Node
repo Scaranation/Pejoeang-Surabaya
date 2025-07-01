@@ -1,2 +1,12 @@
+NavigationRegion2D
+TileMapLayer
+TileMap
+Node2D
+Label
+Control
+RayCast2D
+Line2D
+NavigationAgent2D
 Node
-ProgressBar
+Sprite2D
+PanelContainer

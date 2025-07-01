@@ -20,6 +20,7 @@ func _ready() -> void:
 	weapon_manager.initialize(team.team)
 	add_to_group("Player")
 
+
 func _physics_process(_delta: float) -> void:
 	var movement_direction := Vector2.ZERO
 
