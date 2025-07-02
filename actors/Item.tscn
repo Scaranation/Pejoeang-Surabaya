@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvw3odjmiy1x8"]
+
+[ext_resource type="Texture2D" uid="uid://0ue1xi1ylbl0" path="res://assets/kenney_topdowntanksredux/PNG/Default size/bulletSand3.png" id="2_2h2sl"]
+[ext_resource type="Texture2D" uid="uid://chpyvr7pon3y2" path="res://assets/Test/bandage.png" id="2_jf83j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0yud"]
+radius = 100.0
+
+[node name="Item" type="Area2D"]
+
+[node name="Bandage" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, -1.90735e-06)
+scale = Vector2(0.236667, 0.272222)
+texture = ExtResource("2_jf83j")
+
+[node name="Ammo" type="Sprite2D" parent="."]
+position = Vector2(5.68434e-14, 1)
+scale = Vector2(8.26403, 4.54863)
+texture = ExtResource("2_2h2sl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l0yud")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

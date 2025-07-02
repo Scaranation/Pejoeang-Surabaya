@@ -3,6 +3,7 @@ extends Node2D
 
 const PlayerScene = preload("res://actors/Player.tscn")
 const EnemyScene = preload("res://actors/Enemy.tscn")
+const ItemScene = preload("res://actors/Item.tscn")
 const GameOverScreen = preload("res://UI/GameOverScreen.tscn")
 const PauseScreen = preload("res://UI/PauseScreen.tscn")
 
@@ -17,9 +18,10 @@ const MAP_SCENE_PATH = "res://map/%s.tscn"
 func _ready() -> void:
 	randomize()
 	GlobalSignals.connect("bullet_fired", Callable(bullet_manager, "handle_bullet_spawned"))
-	render_map()  # Initialize the default map
+	render_map() # Initialize the default map
 	spawn_player()
 	spawn_enemy()
+	spawn_items()
 
 func render_map(map_name: String = "Map1"):
 	# Remove the existing map if there is one
@@ -41,36 +43,55 @@ func render_map(map_name: String = "Map1"):
 func spawn_player():
 	player = PlayerScene.instantiate()
 	add_child(player)
+	if map and map.has_node("PlayerSpawn/Player"):
+		player.global_position = map.get_node("PlayerSpawn/Player").global_position
 	player.set_camera_transform(camera.get_path())
 	player.connect("died", Callable(self, "spawn_player"))
 	gui.set_player(player)
 
 func spawn_enemy():
-	var enemy = EnemyScene.instantiate()
-	add_child(enemy)
-	
-	# Get reference to navigation system
-	var nav_map = get_world_2d().get_navigation_map()
-	
-	# Get random navigable position
-	var nav_points = NavigationServer2D.map_get_path(
-		nav_map,
-		Vector2.ZERO,
-		Vector2(1000, 1000),
-		true
-	)
-	
-	if nav_points.size() > 0:
-		# Place enemy at first navigable point found
-		enemy.global_position = nav_points[0]
-		
-		# Set navigation map for enemy's AI
-		var ai = enemy.get_node("AI")
-		if ai and ai.has_node("NavigationAgent2D"):
-			ai.get_node("NavigationAgent2D").set_navigation_map(nav_map)
+	if map and map.has_node("EnemySpawn"):
+		var spawn_points = map.get_node("EnemySpawn").get_children()
+		for spawn_point in spawn_points:
+			var enemy = EnemyScene.instantiate()
+			add_child(enemy)
+			enemy.global_position = spawn_point.global_position
+			
+			# Set navigation map for enemy's AI
+			var nav_map = get_world_2d().get_navigation_map()
+			var ai = enemy.get_node("AI")
+			if ai and ai.has_node("NavigationAgent2D"):
+				ai.get_node("NavigationAgent2D").set_navigation_map(nav_map)
 	else:
-		# Fallback position if no navigation points found
+		var enemy = EnemyScene.instantiate()
+		add_child(enemy)
 		enemy.global_position = Vector2(100, 100)
+
+func spawn_items():
+	if map and map.has_node("ItemSpawn"):
+		# Get all spawn point groups (like Bandage, Ammo, etc)
+		var spawn_groups = map.get_node("ItemSpawn").get_children()
+		
+		for group in spawn_groups:
+			# Get all individual spawn points in this group
+			var spawn_points = group.get_children()
+			print("Found %d %s spawn points" % [spawn_points.size(), group.name])
+			
+			for spawn_point in spawn_points:
+				print("Spawning %s at position: %s" % [group.name, spawn_point.global_position])
+				var item = ItemScene.instantiate()
+				
+				# Configure item based on spawn group
+				match group.name:
+					"Bandage":
+						item.set("item_type", 0)  # 0 = HEALTH enum value
+						item.set("value", 20)  # Healing amount
+				
+				add_child(item)
+				item.global_position = spawn_point.global_position
+				print("%s spawned successfully" % group.name)
+	else:
+		print("No ItemSpawn node found in map")
 
 func handle_player_win():
 	var game_over = GameOverScreen.instantiate()

@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://i8xqpyqwneuj"
-path="res://.godot/imported/RobotoMono-Regular.ttf-f4d91bf2c9f957971a69c527a564559b.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://assets/RobotoMono-Regular.ttf"
-dest_files=["res://.godot/imported/RobotoMono-Regular.ttf-f4d91bf2c9f957971a69c527a564559b.fontdata"]
 
 [params]
 

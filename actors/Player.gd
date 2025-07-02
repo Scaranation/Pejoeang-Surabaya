@@ -18,7 +18,7 @@ signal died
 
 func _ready() -> void:
 	weapon_manager.initialize(team.team)
-	add_to_group("Player")
+	add_to_group("player")
 
 
 func _physics_process(_delta: float) -> void:
@@ -58,3 +58,8 @@ func handle_hit():
 func die():
 	emit_signal("died")
 	queue_free()
+
+func heal(amount: int):
+	health_stat.health += amount
+	health_stat.health = min(health_stat.health, health_stat.max_health)
+	emit_signal("player_health_changed", health_stat.health)
