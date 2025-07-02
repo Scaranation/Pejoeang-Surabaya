@@ -1809,9 +1809,10 @@ tile_set = SubResource("TileSet_d0y10")
 [node name="PlayerSpawn" type="Node2D" parent="."]
 
 [node name="Player" type="Marker2D" parent="PlayerSpawn"]
-position = Vector2(14, 392)
+position = Vector2(892, 383)
 
 [node name="EnemySpawn" type="Node2D" parent="."]
+position = Vector2(9, 417)
 
 [node name="Enemy1" type="Marker2D" parent="EnemySpawn"]
 position = Vector2(503, 508)
